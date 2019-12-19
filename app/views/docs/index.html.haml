@@ -1,0 +1,13 @@
+.wrapper_with_padding 
+  #docs.clearfix
+    - unless @docs.blank?
+      - @docs.each do |doc|
+        %a{href: (url_for [doc])}
+          .doc
+            %p.title= doc.title
+            %p.date= time_ago_in_words(doc.created_at)
+            %p.content= truncate(doc.content, length:100)
+    - else
+      %h2 create Doc!
+      %p Start crating new documents
+      %button= link_to "create doc", new_doc_path
